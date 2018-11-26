@@ -1,0 +1,191 @@
+<sidebar> </sidebar>
+
+<div class="container">
+    <div class="row">
+        <div class="col align-self-end">
+            <div class="col-md-10 offset-md-2">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Registro de Animes </div>
+   
+    <button class="btn btn-lg btn-outline-primary" (click)="registrar(formularioregistro)">Crear</button>
+    <div class="panel-body">
+        <table class="table"  >
+              <thead>
+                      <tr>
+                        <th scope="col"># de codigo</th>
+                        <th scope="col">Nombre de anime</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Cant. de Temporada</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Imagen de referencia</th>
+                        <th scope="col">Acción</th>
+                      
+                      </tr>
+                    </thead>
+
+
+
+
+                   <tbody >
+
+                      <ng-container *ngFor="let la  of ListAnimeArray">
+                        <tr *ngFor="let sss of la.data.users | paginate: { itemsPerPage:4, currentPage: p }">
+
+                        
+<!-- 
+                                 <td>{{objectKeys(ListAnimeArray.data)}} </td> 
+                                  <td>{{objectKeys(ListAnimeArray)}} </td>   -->
+
+                                  <!-- <ng-container *ngFor="let sss of la.data.users"> -->
+                                  <td  >{{(sss.id)}}</td>
+                                  <td  >{{(sss.active)}}</td>
+                                  <td  >{{(sss.email)}}</td>
+                                  <td  >{{(sss.username)}}</td>
+                                <!-- </ng-container> -->
+                                 <!-- <td>{{ la.id }}</td>
+                                  <td>{{ la.nombre }}</td>
+                                  <td>{{ la.autor }}</td>
+                                  <td>{{ la.temporada }}</td>
+                                  <td>{{ la.categoria }}</td> -->
+                                  <!-- <td> <img style="width: 80px;height: 100px;" src="{{ la.img}}"></td> -->
+                                  <td> <button class="btn btn-lg btn-outline-danger" (click)="eliminarmodal(formularioeliminar, sss.id, la.username)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                  <button class="btn btn-lg btn-outline-success" (click)="editarmodal(formularioeditar, la.id, la.nombre, la.autor, la.temporada, la.categoria, la.img)"  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                </td> 
+                                 
+                                
+
+                              
+                                      </tr>
+                                    </ng-container>        
+                    </tbody> 
+           
+        </table>
+
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+      </div>
+      </div>
+ 
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- MODAL ELIMINAR  -->
+
+<ng-template #formularioeliminar let-c="close" let-d="dismiss" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Eliminar Usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <label  class="col-form-label">Estas seguro que deseas eliminar?   </label>
+
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="d('Cross click')" data-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-outline-danger" (click)="c('Save click')">Eliminar</button>
+  </div>
+</ng-template>
+
+<!-- MODAL ELIMINAR TERMINADO -->
+
+
+<!-- MODAL CREAR -->
+
+<ng-template #formularioregistro let-c="close" let-d="dismiss" >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Registrar Anime</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+   <form  #employeeForm="ngForm"  (ngSubmit)="onSubmit(employeeForm)"  >
+       
+       
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label"  >Nombre:</label>
+          <input type="text" class="form-control" id="recipient-username" name="username" #username="ngModel" [(ngModel)]="apiService.selectedEmployee.username" placeholder="username" required>
+          <div class="validation-error" *ngIf="username.invalid && username.touched" >La usuario es requerido</div>
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="recipient-email" name="email" #email="ngModel" [(ngModel)]="apiService.selectedEmployee.email" placeholder="Email" required >
+            <div class="validation-error" *ngIf="email.invalid && email.touched" >El emai es requerido</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="d('Cross click')" >Cerrar</button>
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="resetForm()" >Borrar</button> -->
+          <button type="submit" class="btn btn-outline-primary" name="closeBtn"  #closeBtn  [disabled]="!employeeForm.valid" >Crear</button>
+        </div>
+      </form> 
+    </div>
+    
+  </ng-template>
+
+<!-- MODAL REGISTRAR TERMINADO -->
+
+<!-- MODAL EDITAR INICIADO -->
+
+<ng-template #formularioeditar let-c="close" let-d="dismiss" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Registrar Anime</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+ <form  #employeeFormup="ngForm"  (ngSubmit)="onUpdate(employeeFormup)"  >
+      <div class="form-group">
+        <label for="recipient-name"    class="col-form-label">Nombre de Animes:</label>
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="apiService.selectedEmployee.id" >
+        <input type="text"   class="form-control" id="recipient-name"  name="nombre" #nombre="ngModel" [(ngModel)]="apiService.selectedEmployee.nombre" placeholder="Registras" required>
+      <div class="validation-error" *ngIf="nombre.invalid && nombre.touched" >El nombre del anime es requerido</div>
+      
+      </div>
+      <div class="form-group">
+        <label for="recipient-name" class="col-form-label" >Autor:</label>
+        <input type="text" value="{{Anautor}}"   class="form-control" id="recipient-autor"  name="autor" #autor="ngModel" [(ngModel)]="apiService.selectedEmployee.autor" placeholder="Registrar Nombre de Autor" required>
+        <div class="validation-error" *ngIf="autor.invalid && autor.touched" >El autor es requerido</div>
+      </div>
+      <div class="form-group">
+        <label for="recipient-name"   class="col-form-label">Temporada:</label>
+        <input type="number" value="{{Antemporada}}" class="form-control" id="recipient-temporada"  name="temporada" #temporada="ngModel" [(ngModel)]="apiService.selectedEmployee.temporada" placeholder="Temporadas en total" required> 
+        <div class="validation-error" *ngIf="temporada.invalid && temporada.touched" >La temporada es requerido</div>
+      </div>
+      <div class="form-group">
+        <label for="recipient-name" class="col-form-label"  >Categoria:</label>
+        <input type="text" value="{{Ancategoria}}"   class="form-control" id="recipient-categoria" name="categoria" #categoria="ngModel" [(ngModel)]="apiService.selectedEmployee.categoria" placeholder="Categoria" required>
+        <div class="validation-error" *ngIf="categoria.invalid && categoria.touched" >La categoria del anime es requerido</div>
+      </div>
+      <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Imagen de referencia:</label>
+          <input type="text" value="{{Animg}}"    class="form-control" id="recipient-img" name="img" #img="ngModel" [(ngModel)]="apiService.selectedEmployee.img" placeholder="Url de imagen" required >
+          <div class="validation-error" *ngIf="img.invalid && img.touched" >La imagen de referencia es requerida</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="d('Cross click')" >Cerrar</button>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="resetForm()" >Borrar</button> -->
+        <button type="submit" class="btn btn-outline-primary" name="closeBtn"  #closeBtn  [disabled]="!employeeFormup.valid" >Crear</button>
+      </div>
+    </form> 
+  </div>
+  
+</ng-template>
+
+
+<!-- MODAL EDITAR TERMINADO -->
