@@ -4,7 +4,6 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
 import { TablaInterface } from "../interface";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { retry } from '../../../node_modules/rxjs/operators';
 
 interface Post {
   id: string;
@@ -14,9 +13,10 @@ interface Post {
 @Injectable()
 export class AnimeService {
 
-   private ListAnimeUrl = "http://exebio.inkatech.org.pe/users";
+    private ListAnimeUrl = "http://exebio.inkatech.org.pe/users";
    // private ListAnimeUrl = "http://localhost:3000/users";
 
+  //private ListAnimeUrl = "http://54.146.146.50/users/";
   selectedEmployee: TablaInterface;
 
   constructor(private http: HttpClient) { }
@@ -42,7 +42,7 @@ export class AnimeService {
   // }
 
   public getPostsid( id:number): Observable<TablaInterface[]> {
-    return this.http.get<TablaInterface[]>('http://localhost:3000/users/' + id)
+    return this.http.get<TablaInterface[]>(this.ListAnimeUrl + id)
   }
 
 

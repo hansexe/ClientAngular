@@ -33,22 +33,24 @@
 
                         
 <!-- 
-                                 <td>{{objectKeys(ListAnimeArray.data)}} </td> 
-                                  <td>{{objectKeys(ListAnimeArray)}} </td>   -->
+                                   <td>{{objectKeys(ListAnimeArray.data)}} </td> 
+                                   <td>{{objectKeys(ListAnimeArray)}} </td>   -->
 
-                                  <!-- <ng-container *ngFor="let sss of la.data.users"> -->
+                                   <!-- <ng-container *ngFor="let sss of la.data.users"> -->
                                   <td  >{{(sss.id)}}</td>
                                   <td  >{{(sss.active)}}</td>
                                   <td  >{{(sss.email)}}</td>
                                   <td  >{{(sss.username)}}</td>
-                                <!-- </ng-container> -->
-                                 <!-- <td>{{ la.id }}</td>
+                                  <td  >Hoy</td>
+                                  
+                                  <!-- </ng-container> -->
+                                  <!-- <td>{{ la.id }}</td>
                                   <td>{{ la.nombre }}</td>
                                   <td>{{ la.autor }}</td>
                                   <td>{{ la.temporada }}</td>
                                   <td>{{ la.categoria }}</td> -->
                                   <!-- <td> <img style="width: 80px;height: 100px;" src="{{ la.img}}"></td> -->
-                                  <td> <button class="btn btn-lg btn-outline-danger" (click)="eliminarmodal(formularioeliminar, sss.id, la.username)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                  <td> <button class="btn btn-lg btn-outline-danger" (click)="eliminarmodal(formularioeliminar, sss.id, sss.username)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                   <button class="btn btn-lg btn-outline-success" (click)="editarmodal(formularioeditar, la.id, la.nombre, la.autor, la.temporada, la.categoria, la.img)"  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                 </td> 
                                  
