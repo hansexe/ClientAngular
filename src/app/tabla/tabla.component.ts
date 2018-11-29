@@ -2,7 +2,6 @@ import { Component , OnInit } from '@angular/core';
 import { AnimeService } from "../services/Anime.service"
 import { TablaInterface } from "../interface";
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { error } from 'util';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -38,7 +37,9 @@ export class TablaComponent implements OnInit {
 
   objectKeys = Object.keys;
 
-  constructor(private apiService: AnimeService , private modalService: NgbModal , private toastr : ToastrService){}
+  constructor(private apiService: AnimeService , 
+    private modalService: NgbModal , 
+    private toastr : ToastrService){}
 
  public ListAnimeComponent(): void {
       this.apiService.ListAnimeService().subscribe(
@@ -68,13 +69,9 @@ export class TablaComponent implements OnInit {
       categoria: '',
       img : '',
     }
-
-}
-
+  }
 
   //  MODAL EMPIEZA AQUI
-  
-
 
    public registrar(formularioregistro) {
     this.mr = this.modalService.open(formularioregistro);
@@ -83,7 +80,6 @@ export class TablaComponent implements OnInit {
   //  public editar(formularioeditar) {
   //   this.mr = this.modalService.open(formularioeditar);
   //  }
-
    
   public onSubmit(form : NgForm){
     this.apiService.postEmployee(form.value)
@@ -93,21 +89,16 @@ export class TablaComponent implements OnInit {
     this.closeModal();
     this.toastr.success("Registro de un Anime" , "Completado :) ")
    })
-   
    }
 
-   
-   public eliminarmodal(formularioeliminar , id, username) {
 
+   public eliminarmodal(formularioeliminar , id, username) {
     this.Anid = id;
     // this.Annombre = nombre;
     // this.Anautor = autor;
     // this.Antemporada = temporada;
     // this.Ancategoria = categoria;
     // this.Animg = img;
-
-    console.log(username);
-
      this.modalService.open(formularioeliminar).result.then((result) => {
       this.apiService.deleteEmployee(id)
       .subscribe(x => {
@@ -122,32 +113,17 @@ export class TablaComponent implements OnInit {
    }
 
 
-   public editarmodal(formularioeditar , id, nombre, autor, temporada, categoria, img) {
-
+   public editarmodal(formularioeditar , id, 
+    nombre, autor, temporada, 
+    categoria, img) {
     this.Anid = id;
     this.Annombre = nombre;
     this.Anautor = autor;
     this.Antemporada = temporada;
     this.Ancategoria = categoria;
     this.Animg = img;
-
-    var Arrayedit = {
-       id,
-       nombre,
-       autor,
-       temporada,
-       categoria,
-       img,
-    }
-
-
-    console.log(Arrayedit);
- 
     this.mr = this.modalService.open(formularioeditar);
-
   }
-
-
   // public onUpdate(form : NgForm){
   //   this.apiService.postEmployee(form.value)
   //   .subscribe( data => {
@@ -156,11 +132,7 @@ export class TablaComponent implements OnInit {
   //   this.closeModal();
   //   this.toastr.success("Registro de Usuarios" , "Completado :) ")
   //  })
-   
   //  }
-
-
-
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -172,28 +144,17 @@ export class TablaComponent implements OnInit {
     }
   }
  
-
-
    public closeModal() {
     this.mr.close();
  }
 
-
-
- 
-
 //  public onDelete(id : number) {
-
 //    this.apiService.deleteEmployee(id)
 //     .subscribe(x => {
 //       this.getPosts();
 //     this.toastr.success("Eliminacion de Usuario" +  id, "Se elimino correctamente");
-
 //     })
-
 //  }
-
-
 
 }
 

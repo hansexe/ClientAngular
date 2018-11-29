@@ -1,13 +1,12 @@
 // Declaraciones - apodos para los modulos
 import { AppComponent } from './app.component';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { SidebarComponent} from './sidebar/sidebar.component';
 import { TablaComponent} from './tabla/tabla.component';
 import { NavComponent} from './nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 //Importaciones - como extensiones
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,6 +42,9 @@ import { APP_BASE_HREF } from '@angular/common';
     NavComponent,
 
  
+  ],
+  schemas: [ 
+    CUSTOM_ELEMENTS_SCHEMA 
   ],
   imports: [
     BrowserModule,
