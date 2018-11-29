@@ -62,7 +62,7 @@ export class AnimeService {
 
 
   public deleteEmployee(id : number) {
-    return this.http.delete<TablaInterface[]>(this.ListAnimeUrl + id);
+    return this.http.delete<TablaInterface[]>(this.ListAnimeUrl +'/' + id);
   }
   
 

@@ -41,20 +41,6 @@ export class TablaComponent implements OnInit {
   constructor(private apiService: AnimeService , private modalService: NgbModal , private toastr : ToastrService){}
 
  public ListAnimeComponent(): void {
-
-    // this.apiService.ListAnimeService().subscribe(result => {
-    //   this.ListAnimeArray = result as TablaInterface[];
-    //     },
-    //    error => console.log("Error :: " + error ))
-
-
- // this.apiService.ListAnimeService().subscribe(
-    //    resultArray => this.ListAnimeArray =
-    //    resultArray,
-    //    error => console.log("Error :: " + error ))
-
-
-
       this.apiService.ListAnimeService().subscribe(
         data => { this.ListAnimeArray = data;
    this.ListAnimeArray = Array.of(this.ListAnimeArray); 
@@ -64,13 +50,6 @@ export class TablaComponent implements OnInit {
         );
   
   }
-
-
-
-  //  public getPostsid(id): void { 
- 
-  // }
-
 
   public ngOnInit(): void{
     this.ListAnimeComponent();
@@ -82,26 +61,19 @@ export class TablaComponent implements OnInit {
     if(form !=null)
     form.reset();
     this.apiService.selectedEmployee = {
-      // id : null,
-      // nombre : '',
-      // autor: '',
-      // temporada: null,
-      // categoria: '',
-      // img : '',
-
-      username : '',
-      email: '',
-
-
+      id : null,
+      nombre : '',
+      autor: '',
+      temporada: null,
+      categoria: '',
+      img : '',
     }
 
 }
 
 
-
   //  MODAL EMPIEZA AQUI
   
-
 
 
    public registrar(formularioregistro) {
@@ -119,12 +91,10 @@ export class TablaComponent implements OnInit {
     this.resetForm(form);
     this.ListAnimeComponent();
     this.closeModal();
-    this.toastr.success("Registro de Usuarios" , "Completado :) ")
+    this.toastr.success("Registro de un Anime" , "Completado :) ")
    })
    
    }
-
-
 
    
    public eliminarmodal(formularioeliminar , id, username) {
@@ -136,7 +106,7 @@ export class TablaComponent implements OnInit {
     // this.Ancategoria = categoria;
     // this.Animg = img;
 
-    console.log(this.ListAnimeArray);
+    console.log(username);
 
      this.modalService.open(formularioeliminar).result.then((result) => {
       this.apiService.deleteEmployee(id)
@@ -222,8 +192,6 @@ export class TablaComponent implements OnInit {
 //     })
 
 //  }
-
-
 
 
 
